@@ -9,30 +9,30 @@
     <table>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Category</th>
+            <th scope="col">Component</th>
             <!-- <th scope="col">Last</th> -->
             <th scope="col">Type</th>
             <th scope="col">Specification</th>
-            <th>UID</th>
+            <th>Component UID</th>
         </tr>
         <tr>
-            <td>1</th>
+            <td>1</td>
             <td>Display</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="disp_type" name="disp_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="disp_type">
+                    {% for type in data %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-               <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+               <input list="disp_spec" name="disp_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="disp_spec">
+                    {% for type in data1 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -44,20 +44,20 @@
             <td>2</th>
             <td>RAM</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="ram_type" name="ram_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="ram_type">
+                    {% for type in data2 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="ram_spec" name="ram_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="ram_spec">
+                    {% for type in data3 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -69,20 +69,20 @@
             <td>3</th>
             <td>HDD</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="hdd_type" name="hdd_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="hdd_type">
+                    {% for type in data4 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="hdd_spec" name="hdd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="hdd_spec">
+                    {% for type in data5 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -94,20 +94,20 @@
             <td>4</th>
             <td>SSD</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="ssd_type" name="ssd_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="ssd_type">
+                    {% for type in data6 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="ssd_spec" name="ssd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="ssd_spec">
+                    {% for type in data7 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -119,20 +119,20 @@
             <td>5</th>
             <td>Processor</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="processor_type" name="processor_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="processor_type">
+                    {% for type in data8 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="processor_spec" name="processor_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="processor_spec">
+                    {% for type in data9 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -144,20 +144,20 @@
             <td>6</th>
             <td>Graphics Card</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="graphics_type" name="graphics_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="graphics_type">
+                    {% for type in data10 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="graphics_spec" name="graphics_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="graphics_spec">
+                    {% for type in data11%}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -169,20 +169,20 @@
             <td>7</th>
             <td>Battery</td>
             <td>
-                <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="battery_type" name="battery_type" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="battery_type">
+                    {% for type in data12 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
             <td>
-                <input list="specification" name="specification" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="specification">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+                <input list="battery_spec" name="battery_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="battery_spec">
+                    {% for type in data13 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
                 </input>
             </td>
@@ -190,7 +190,7 @@
               <input disabled type="text">
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>8</th>
             <td>Battery</td>
             <td>
@@ -214,11 +214,11 @@
             <td>
               <input disabled type="text">
             </td>
-        </tr>
+        </tr> -->
     </table>
     </section>
 
-    <button id="myBtn" class="primary-button"><span>Mark as Recycled </span></button>
+    <button id="myBtn" class="primary-button"><span>Mark as Manufactured</span></button>
 
   	<!-- The Modal -->
   	<div id="myModal" class="modal">
