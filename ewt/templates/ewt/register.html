@@ -63,7 +63,8 @@
             {% if messages %}
                 <ul class="messages list-unstyled">
                     {% for message in messages %}
-                    {% if message.tags %} <li class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% if message.tags %}
+                        <li class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                     {% endfor %}
                 </ul>
             {% endif %}

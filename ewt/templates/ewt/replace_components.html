@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+    {% block content %}
+    <section class="page-heading">
+        <h2>Replace Components</h2>
+    </section>
+
+    <table>
+        <tr>
+          <th scope="col">UID</th>
+          <th scope="col">Old Component Name</th>
+          <th scope="col" class="center">New Component Name</th>
+        </tr>
+        <tr>
+          <td>1</th>
+          <td>Display</td>
+          <td>
+            <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="components">
+                    <option value="Comp 1"></option>
+                    <option value="Comp 2"></option>
+                    <option value="Comp 3"></option>
+                </datalist>
+            </input>
+          </td>
+        </tr>
+        <tr>
+          <td>2</th>
+          <td>RAM</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+        <tr>
+          <td>3</th>
+          <td>HDD</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+        <tr>
+          <td>4</th>
+          <td>SSD</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+        <tr>
+          <td>5</th>
+          <td>Processor</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+        <tr>
+          <td>6</th>
+          <td>Graphics Card</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+        <tr>
+          <td>7</th>
+          <td>Battery</td>
+          <td>
+              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
+                  <datalist id="components">
+                      <option value="Comp 1"></option>
+                      <option value="Comp 2"></option>
+                      <option value="Comp 3"></option>
+                  </datalist>
+              </input>
+          </td>
+        </tr>
+    </table>
+    
+    <button id="myBtn" class="primary-button"><span>Replace Items</span></button>
+
+  	<!-- The Modal -->
+  	<div id="myModal" class="modal">
+	
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h1>Successfully replaced items</h1>
+        <!-- <p>Do you want to send these laptops to the Recycler?</p>
+        <div id="modal-button">
+			<button id="modal-button-cancel">Cancel</button>
+        	<button id="modal-button-confirm">Send to Recycler</button>
+		</div> -->
+      </div>
+	
+    </div>
+    {% endblock %}

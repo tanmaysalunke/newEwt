@@ -21,8 +21,6 @@ def registerPage(request):
                         category=request.POST.get('access_level'))
         try:
             user_reg.save()
-            # groups = Group.objects.get(name=request.POST.get('access_level'))
-            # groups.user_set.add(user_reg)
             return render(request, "ewt/login.html")
         except IntegrityError:
             messages.info(request, "Username already present!")
@@ -35,21 +33,20 @@ def loginPage(request):
         password = request.POST.get('password')
         user = CustomUser.objects.get(username=username)
 
+        name = user.first_name
         # print(user.category)
-        #category based access to pages:
-        if user.category == 'Manufacturer':
-            return render(request, 'manufacturer.html')
-        elif user.category == 'Refurbisher':
-            return render(request, 'refurbisher.html')
-        elif user.category == 'Recycler':
-            return render(request, 'recycler.html')
 
-            
         # implement try catch for username validation
 
         if check_password(password, user.password) is True:
             login(request, user)
-            return redirect('base.html')
+            #category based access to pages:
+            if user.category == 'Manufacturer':
+                return render(request, 'ewt/Manufacturer.html', {'user_name' : name})
+            elif user.category == 'Refurbisher':
+                return render(request, 'ewt/Refurbisher.html', {'user_name' : name})
+            elif user.category == 'Recycler':
+                return render(request, 'ewt/recycler.html', {'user_name' : name})
         else:
             messages.info(request, 'Username or Password is incorrect')
     return render(request, 'ewt/login.html')
