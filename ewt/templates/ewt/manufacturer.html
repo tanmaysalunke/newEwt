@@ -6,195 +6,197 @@
     </section>
 
     <section>
-    <table>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Component</th>
-            <!-- <th scope="col">Last</th> -->
-            <th scope="col">Type</th>
-            <th scope="col">Specification</th>
-            <th>Component UID</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Display</td>
-            <td>
-                <input list="disp_type" name="disp_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="disp_type">
-                    {% for type in data %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-               <input list="disp_spec" name="disp_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="disp_spec">
-                    {% for type in data1 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>2</th>
-            <td>RAM</td>
-            <td>
-                <input list="ram_type" name="ram_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="ram_type">
-                    {% for type in data2 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="ram_spec" name="ram_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="ram_spec">
-                    {% for type in data3 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>3</th>
-            <td>HDD</td>
-            <td>
-                <input list="hdd_type" name="hdd_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="hdd_type">
-                    {% for type in data4 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="hdd_spec" name="hdd_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="hdd_spec">
-                    {% for type in data5 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>4</th>
-            <td>SSD</td>
-            <td>
-                <input list="ssd_type" name="ssd_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="ssd_type">
-                    {% for type in data6 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="ssd_spec" name="ssd_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="ssd_spec">
-                    {% for type in data7 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>5</th>
-            <td>Processor</td>
-            <td>
-                <input list="processor_type" name="processor_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="processor_type">
-                    {% for type in data8 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="processor_spec" name="processor_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="processor_spec">
-                    {% for type in data9 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>6</th>
-            <td>Graphics Card</td>
-            <td>
-                <input list="graphics_type" name="graphics_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="graphics_type">
-                    {% for type in data10 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="graphics_spec" name="graphics_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="graphics_spec">
-                    {% for type in data11%}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-        <tr>
-            <td>7</th>
-            <td>Battery</td>
-            <td>
-                <input list="battery_type" name="battery_type" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="battery_type">
-                    {% for type in data12 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-                <input list="battery_spec" name="battery_spec" placeholder="Select a Specification" class="datalist-dropdown">
-                <datalist id="battery_spec">
-                    {% for type in data13 %}
-                        <option>{{ type }}</option>
-                    {% endfor %}
-                </datalist>
-                </input>
-            </td>
-            <td>
-              <input disabled type="text">
-            </td>
-        </tr>
-    </table>
+    <form id="comp_uid" method="post" >
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Component</th>
+                <!-- <th scope="col">Last</th> -->
+                <th scope="col">Type</th>
+                <th scope="col">Specification</th>
+                <th>Component UID</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Display</td>
+                <td>
+                    <input list="disp_type" name="disp_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="disp_type">
+                        {% for type in data %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                   <input list="disp_spec" name="disp_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="disp_spec">
+                        {% for type in data1 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="display_uid" name="display_uid" value="0001">
+                </td>
+            </tr>
+            <tr>
+                <td>2</th>
+                <td>RAM</td>
+                <td>
+                    <input list="ram_type" name="ram_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="ram_type">
+                        {% for type in data2 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="ram_spec" name="ram_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="ram_spec">
+                        {% for type in data3 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="ram_uid" name="ram_uid" value="0001">
+                </td>
+            </tr>
+            <tr>
+                <td>3</th>
+                <td>HDD</td>
+                <td>
+                    <input list="hdd_type" name="hdd_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="hdd_type">
+                        {% for type in data4 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="hdd_spec" name="hdd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="hdd_spec">
+                        {% for type in data5 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="hdd_uid" name="hdd_uid" value="0001">
+                </td>
+            </tr>
+            <tr>
+                <td>4</th>
+                <td>SSD</td>
+                <td>
+                    <input list="ssd_type" name="ssd_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="ssd_type">
+                        {% for type in data6 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="ssd_spec" name="ssd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="ssd_spec">
+                        {% for type in data7 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="ssd_uid" name="ssd_uid" value="2001">
+                </td>
+            </tr>
+            <tr>
+                <td>5</th>
+                <td>Processor</td>
+                <td>
+                    <input list="processor_type" name="processor_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="processor_type">
+                        {% for type in data8 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="processor_spec" name="processor_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="processor_spec">
+                        {% for type in data9 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="processor_uid" name="processor_uid" value="1001">
+                </td>
+            </tr>
+            <tr>
+                <td>6</th>
+                <td>Graphics Card</td>
+                <td>
+                    <input list="graphics_type" name="graphics_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="graphics_type">
+                        {% for type in data10 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="graphics_spec" name="graphics_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="graphics_spec">
+                        {% for type in data11%}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="graphics_uid" name="graphics_uid" value="0011">
+                </td>
+            </tr>
+            <tr>
+                <td>7</th>
+                <td>Battery</td>
+                <td>
+                    <input list="battery_type" name="battery_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="battery_type">
+                        {% for type in data12 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                    <input list="battery_spec" name="battery_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="battery_spec">
+                        {% for type in data13 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+                </td>
+                <td>
+                  <input type="text" id="battery_uid" name="battery_uid" value="0001">
+                  <!-- INSERTED DUMMY VALUE -->
+                </td>
+            </tr>
+        </table>
     </section>
-
-    <button id="myBtn" class="primary-button"><span>Mark as Manufactured</span></button>
-
+    <button type="submit" id="myBtn" class="primary-button"><span>Mark as Manufactured</span></button>
+    </form>
   	<!-- The Modal -->
   	<div id="myModal" class="modal">
 	
