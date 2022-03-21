@@ -281,12 +281,45 @@ margin: auto;
   border-radius: 3px;
 }
 
+.dashboard-btn
+{
+  display: block;
+  margin: 5% auto;
+  width: 15%;
+  padding: 0.5%;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: rgb(245, 126, 82);
+  color: #000000;
+  text-decoration: none;
+  border: 2px solid black;
+  text-align: center;
+}
+
+#dashboard-btn-1
+{
+  float: left;
+  margin-left: 30%;
+}
+
+#dashboard-btn-2
+{
+  float: right;
+  margin-right: 30%;
+}
+
+.dashboard-btn:hover
+{
+  background-color: #000;
+  color: #fff;
+}
+
 footer {
-background-color: #b3ff99;
-position: fixed;
-bottom: 0;
-width: 100%;
-height: 5%;
-text-align: center;
-padding-top: 0.75%;
+  background-color: #b3ff99;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5%;
+  text-align: center;
+  padding-top: 0.75%;
 }

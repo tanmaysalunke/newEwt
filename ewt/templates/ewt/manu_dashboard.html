@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+    {% block content %}
+    <section class="page-heading" style="margin-top: 2%;">
+        <h2>{{request.user.category}} Dashboard</h2>
+    </section>
+
+    <section style="margin-top: 10%;">
+        {% if request.user.category == "Manufacturer" %}
+            <a href="{% url 'dataentry' %}" class="dashboard-btn">Data Entry</a>
+        {% endif %}
+        <a href="{% url 'viewdata' %}" class="dashboard-btn">View Data</a>
+    </section>
+    {% endblock %}

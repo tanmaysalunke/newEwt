@@ -26,6 +26,6 @@ class manuData(models.Model):
     battery_uid = models.CharField(max_length=4)
 
 class save_uid(models.Model):
-    username = models.CharField(max_length=100, default="abcd")
+    username = models.CharField(max_length=100)
     uid_list = models.JSONField()
-    
+    category = models.CharField(max_length=100)

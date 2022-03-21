@@ -2,8 +2,14 @@
 {% block title %} Register {% endblock %}
     {% block content %}
 		<section style="text-align: center; margin-top: 2%;">
-    	<h2>Recycler</h2>
-    	<p>Received from the Manufacturer / Refurbisher</p>
+    	<h2>{{ request.user.category }}</h2>
+		{% if request.user.category == "Manufacturer" %}
+			<p>Manufactured Laptops</p>
+		{% elif request.user.category == "Recycler" %}
+    		<p>Received from the Manufacturer / Refurbisher</p>
+		{% elif request.user.category == "Refurbisher" %}
+			<p>Received from the Manufacturer</p>
+		{% endif %}
     </section>
 	
 		<section>

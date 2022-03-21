@@ -1,5 +1,3 @@
-from contextlib import nullcontext
-from unicodedata import category
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.db import IntegrityError, models
@@ -64,6 +62,7 @@ def dataEntry(request):
 
 def saveUid(uid_list, request):
     save_main_uid = save_uid(username = request.user.username,
+                            category = request.user.category,
                             uid_list = json.dumps(uid_list))
     save_main_uid.save()
 
@@ -78,12 +77,13 @@ def loginPage(request):
                 login(request, user)
                 #category based access to pages:
                 if user.category == 'Manufacturer':
-                    #print(uid_dict.display_type)
-                    return redirect('dataentry')
+                    return redirect('dashboard')
                 elif user.category == 'Refurbisher':
-                    return render(request, 'ewt/Refurbisher.html')
+                    return redirect('dashboard')
+                    # return render(request, 'ewt/Refurbisher.html')
                 elif user.category == 'Recycler':
-                    return render(request, 'ewt/recycler.html')
+                    return redirect('dashboard')
+                    # return render(request, 'ewt/recycler.html')
             else:
                 messages.info(request, 'Username or Password is incorrect')
 
@@ -98,6 +98,11 @@ def loginPage(request):
         
     return render(request, 'ewt/login.html')
 
+def dashboard(request):
+    return render(request, 'ewt/manu_dashboard.html')
+
+def viewdata(request):
+    return render(request, 'ewt/viewdata.html')
 
 # LOGOUT
 @login_required(login_url='login')
