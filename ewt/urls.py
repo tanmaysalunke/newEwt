@@ -7,5 +7,6 @@ urlpatterns = [
     path('logout/', views.logoutUser , name='logout'),
     path('dataentry/', views.dataEntry, name='dataentry'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('viewdata/', views.viewdata, name='viewdata')
+    path('viewdata/', views.viewdata, name='viewdata'),
+    path('replacecomponents/', views.replaceComp, name='replacecomponents')
 ]

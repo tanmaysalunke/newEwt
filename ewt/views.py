@@ -116,6 +116,9 @@ def transfer(request, uid_list):
     transaction.save()
     return render(request, 'dataentry')
 
+def replaceComp(request):
+    return render(request, 'ewt/replace_component.html')
+
 # LOGOUT
 @login_required(login_url='login')
 def logoutUser(request):
