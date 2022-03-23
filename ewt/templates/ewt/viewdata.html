@@ -23,7 +23,7 @@
 				{% for uid in logs %}
 					{% if uid.username == request.user.username %}
 						<tr>
-    					  <td>{{ forloop.counter }}</td>
+    					  <td>{{ forloop.counter0 }}</td>
     					  <td><a href="ewt/replace_components.html">{{ uid.uid_list }}</a></td>
     					  <td><input type="checkbox" class="checkbox">
     					    <span class="checkmark"></span></td>
@@ -32,6 +32,35 @@
 				{% endfor %}
     		</table>
     	</section>
+		<div class="form-group">
+			<!-- <label for="category">Category</label> -->
+			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
+				<select required class="form-control" id="menu" form="registration" name="menu">
+					<option value="" id="">Category</option>
+					{% if request.user.category == "Manufacturer" %}
+						<option value="Recycler" id="RC">Recycler</option>
+						<option value="Refurbisher" id="RF">Refurbisher</option>
+					{% elif request.user.category == "Recycler" %}
+    					
+					{% elif request.user.category == "Refurbisher" %}
+						<option value="Recycler" id="RC">Recycler</option>
+					{% endif %}
+
+				</select>                
+		</div>
+		<div class="form-group">
+			<!-- <label for="category">Category</label> -->
+			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
+				<select required class="form-control" id="entrees" form="registration" name="entrees">
+					<option value="" id="">Location</option>
+					{% for loc in refrec %}
+
+						<option>{{ loc.location }}</option>
+
+					{% endfor %}
+				</select>                
+		</div>
+
 
 
   <!-- <button id="myBtn" class="button"><span>Send to Recycler </span></button> -->

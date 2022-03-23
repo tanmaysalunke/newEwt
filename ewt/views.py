@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from django.db import IntegrityError, models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from .models import CustomUser, manuData, save_uid
+from .models import CustomUser, manuData, save_uid, transactions
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password
@@ -72,7 +72,6 @@ def loginPage(request):
         password = request.POST.get('password')
         try:
             user = CustomUser.objects.get(username=username)
-            name = user.first_name
             if check_password(password, user.password) is True:
                 login(request, user)
                 #category based access to pages:
@@ -103,7 +102,19 @@ def dashboard(request):
 
 def viewdata(request):
     logs = save_uid.objects.all()
-    return render(request, 'ewt/viewdata.html', {'logs': logs})
+    refrec = CustomUser.objects.all()
+    # for loc in refrec:
+    #     print(loc.location)
+    return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
+
+def transfer(request, uid_list):
+    transaction = transactions(sender_username = request.user.username,
+                            sender_category = request.user.category,
+                            uid = json.dumps(uid_list),
+                            receiver_username = request.user.username,
+                            receiver_category = request.user.category )
+    transaction.save()
+    return render(request, 'dataentry')
 
 # LOGOUT
 @login_required(login_url='login')
