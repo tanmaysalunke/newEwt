@@ -52,7 +52,7 @@ def dataEntry(request):
 
         compUid.save()
 
-    return render(request, 'ewt/Manufacturer.html', {'data' : uid_dict.display_type, 'data1': uid_dict.display_spec, 
+    return render(request, 'ewt/dataentry.html', {'data' : uid_dict.display_type, 'data1': uid_dict.display_spec, 
                                                     'data2': uid_dict.ram_type,'data3': uid_dict.ram_spec, 
                                                     'data4' : uid_dict.hdd_type, 'data5': uid_dict.hdd_spec, 
                                                     'data6': uid_dict.ssd_type, 'data7' : uid_dict.ssd_spec, 
@@ -98,7 +98,7 @@ def loginPage(request):
     return render(request, 'ewt/login.html')
 
 def dashboard(request):
-    return render(request, 'ewt/manu_dashboard.html')
+    return render(request, 'ewt/dashboard.html')
 
 def viewdata(request):
     logs = save_uid.objects.all()
