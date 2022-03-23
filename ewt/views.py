@@ -102,7 +102,8 @@ def dashboard(request):
     return render(request, 'ewt/manu_dashboard.html')
 
 def viewdata(request):
-    return render(request, 'ewt/viewdata.html')
+    logs = save_uid.objects.all()
+    return render(request, 'ewt/viewdata.html', {'logs': logs})
 
 # LOGOUT
 @login_required(login_url='login')
