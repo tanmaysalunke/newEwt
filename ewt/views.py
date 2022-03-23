@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.db import IntegrityError, models
@@ -126,3 +127,8 @@ def logoutUser(request):
     return redirect('login')
 
 
+def test_data(request):
+    data= request.GET.get("type", False)
+    bye = {"Hi":"Fuck oFf", "data":data}
+
+    return JsonResponse(bye)

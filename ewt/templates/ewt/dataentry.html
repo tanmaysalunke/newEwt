@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} Register {% endblock %}
-    {% block content %}
+
+
+{% block content %}
+
     <section class="page-heading" style="margin-top: 2%;">
         <h2>Manufacturer Data Entry</h2>
     </section>
@@ -212,4 +215,31 @@
       </div>
 	
     </div>
+
+
+    {% block javascript %}
+    <script>
+    $(".datalist-dropdown").change(function () {
+        var type = $(this).val();
+        $.ajax({
+        type: "GET",
+        url: 'dataentry1',
+        data: {
+            'type': type
+        },
+        dataType: 'json',
+        success: function (data) {
+            alert("Boble");
+            console.log(data);
+            $("display_uid").val() = "0004";
+        },
+        error: function(data){
+           alert("Bobla");
+        }
+        });
+
+    });
+    </script>
+    {% endblock %}
+    
     {% endblock %}
