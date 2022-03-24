@@ -1,3 +1,4 @@
+from django.dispatch import receiver
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
@@ -102,24 +103,54 @@ def dashboard(request):
     return render(request, 'ewt/dashboard.html')
 
 def viewdata(request):
+    usr = CustomUser.objects.all()
     logs = save_uid.objects.all()
     refrec = CustomUser.objects.all()
-    # for loc in refrec:
-    #     print(loc.location)
+
+    ids = save_uid.objects.all()
+    id = []
+    for i in ids:
+        # id.append(i.id)
+        resp = request.POST.get(str(i.id),False)
+        # print(resp,i.id)
+        if resp:
+            id.append(i.uid_list) 
+    print(id)               
+    loc = request.POST.get("entrees")
+    cat = request.POST.get("menu")
+    print('location:',loc,'cat',cat)
+    # for i in usr:
+    #     if i.location == loc:
+    #         setUsername = i.username
+    # transaction = transactions(sender_username = request.user.username,
+    #                         sender_category = request.user.category,
+    #                         uid = json.dumps(uid_list),
+    #                         receiver_username = setUsername,
+    #                         receiver_category = request.POST.get('menu') )
+    # transaction.save()
+
     return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
 
 def transfer(request, uid_list):
     usr = CustomUser.objects.all()
-    loc = request.POST.get('entrees')
-    for i in usr:
-        if i.location == loc:
-            setUsername = i.username
-    transaction = transactions(sender_username = request.user.username,
-                            sender_category = request.user.category,
-                            uid = json.dumps(uid_list),
-                            receiver_username = setUsername,
-                            receiver_category = request.POST.get('menu') )
-    transaction.save()
+    # ids = save_uid.objects.all()
+    # id = []
+    # for i in ids:
+    #     id.append(i.id)
+    #     # resp = request.POST.get(i.id,False)
+    #     # if resp:
+    #     #     id.append(resp) 
+    # print(id)               
+    # loc = request.POST.get('entrees')
+    # for i in usr:
+    #     if i.location == loc:
+    #         setUsername = i.username
+    # transaction = transactions(sender_username = request.user.username,
+    #                         sender_category = request.user.category,
+    #                         uid = json.dumps(uid_list),
+    #                         receiver_username = setUsername,
+    #                         receiver_category = request.POST.get('menu') )
+    # transaction.save()
     return render(request, 'dataentry')
 
 def replaceComp(request):
@@ -207,3 +238,28 @@ def sendToData(request):
         else:
             data = {'type':'abc'}
         return JsonResponse(data)
+
+
+def sendData(request):
+    if request.method=="GET":
+        usr = CustomUser.objects.all()
+        category = request.GET.get("category")
+        receiver_category = request.GET.get("receiver_category")
+        receiver_location = request.GET.get("receiver_location")
+        print("HI ",category.split(','), " ", receiver)
+        d ={'hii':'hue'}
+        nums = category.split(',')
+        for i in usr:
+            if i.location == receiver_location:
+                setUsername = i.username
+                break
+        for num in nums:
+            log = save_uid.objects.get(id=num)
+            transaction = transactions(sender_username = request.user.username,
+                            sender_category = request.user.category,
+                            uid = json.dumps(log.uid_list),
+                            receiver_username = setUsername,
+                            receiver_category = receiver_category )
+            transaction.save()
+            print(log)
+        return JsonResponse(d)

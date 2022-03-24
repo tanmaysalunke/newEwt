@@ -13,20 +13,20 @@
     	</section>
 	
 		<section>
-		<form method="post">
-      		<table>
+	
+      		<table id="disptable">
     			<tr>
     			  	<th>Sr. No.</th>
     			  	<th>Laptops</th>
-    			  	<th> <input type="checkbox" class="checkbox">
+    			  	<th> <input type="checkbox" class="checkbox" >
     			  	  <span class="checkmark"></span></th>
     			</tr>
 				{% for uid in logs %}
 					{% if uid.username == request.user.username %}
 						<tr>
-    					  <td>{{ forloop.counter0 }}</td>
+    					  <td id="test" value='{{ uid.id }}'>{{ uid.id }}</td>
     					  <td><a href="{% url 'replacecomponents' %}">{{ uid.uid_list }}</a></td>
-    					  <td><input type="checkbox" class="checkbox">
+    					  <td><input type="checkbox" name="{{ uid.id }}" class="checkbox">
     					    <span class="checkmark"></span></td>
     					</tr>
 					{% endif %}
@@ -57,17 +57,19 @@
 				</select>                
 		</div>
 
+		<!-- <button id="myBtn" class="button"><span>Send to Recycler </span></button> -->
+		{% if request.user.category == "Manufacturer" %}
+			<button type="submit" id="myBtn" class="primary-button" style="margin-bottom: 5%;"><span>Send</span></button>
+		{% elif request.user.category == "Recycler" %}
+			<button type="submit" id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
+		{% elif request.user.category == "Refurbisher" %}
+			<button id="myBtn" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
+			<button type="submit" id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
+		{% endif %}
 
-	</form>
-  <!-- <button id="myBtn" class="button"><span>Send to Recycler </span></button> -->
-  	{% if request.user.category == "Manufacturer" %}
-		<button type="submit" id="myBtn" class="primary-button" style="margin-bottom: 5%;"><span>Send</span></button>
-	{% elif request.user.category == "Recycler" %}
-		<button type="submit" id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
-	{% elif request.user.category == "Refurbisher" %}
-		<button id="myBtn" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
-		<button type="submit" id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
-	{% endif %}
+
+	
+  
 	
 
   	<!-- The Modal -->
@@ -124,6 +126,38 @@
         }
         });
     });
+
+
+	$("#myBtn").click(function () {
+		$.ajax({
+        type: "GET",
+        url: '{% url "senddata" %}',
+        data: {
+            'category': '2,4,5',
+			'receiver_category': $(".form-control[name='menu']").val(),
+			'receiver_location':$(".form-control[name='entrees']").val()
+        },
+        dataType: 'json',
+        success: function (data) {
+			alert("Sent Successfully!") 
+			}
+		});
+	});
+
+
+       
+
+			
+        // },
+        // error: function(data){
+        //    alert("Error!");
+		//    $("#entrees").val("Kurla").change();
+        //    console.log(data);
+        // }
+        // });
+    // });
+
+
     </script>
     {% endblock %}
 

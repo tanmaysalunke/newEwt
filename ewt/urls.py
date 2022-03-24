@@ -10,5 +10,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('viewdata/', views.viewdata, name='viewdata'),
     path('viewdata1', views.sendToData, name='viewdata1'),
-    path('replace/', views.replaceComp, name='replacecomponents')
+    path('replace/', views.replaceComp, name='replacecomponents'),
+    path('senddata', views.sendData, name="senddata")
 ]
