@@ -13,6 +13,7 @@
     	</section>
 	
 		<section>
+		<form method="post">
       		<table>
     			<tr>
     			  	<th>Sr. No.</th>
@@ -24,7 +25,7 @@
 					{% if uid.username == request.user.username %}
 						<tr>
     					  <td>{{ forloop.counter0 }}</td>
-    					  <td><a href="ewt/replace_components.html">{{ uid.uid_list }}</a></td>
+    					  <td><a href="{% url 'replacecomponents' %}">{{ uid.uid_list }}</a></td>
     					  <td><input type="checkbox" class="checkbox">
     					    <span class="checkmark"></span></td>
     					</tr>
@@ -35,8 +36,8 @@
 		<div class="form-group">
 			<!-- <label for="category">Category</label> -->
 			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
-				<select required class="form-control" id="menu" form="registration" name="menu">
-					<option value="" id="">Category</option>
+				<select required class="form-control" form="registration" name="menu">
+					<option>Category</option>
 					{% if request.user.category == "Manufacturer" %}
 						<option value="Recycler" id="RC">Recycler</option>
 						<option value="Refurbisher" id="RF">Refurbisher</option>
@@ -51,27 +52,21 @@
 		<div class="form-group">
 			<!-- <label for="category">Category</label> -->
 			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
-				<select required class="form-control" id="entrees" form="registration" name="entrees">
+				<select required class="form-control" form="registration" name="entrees" id="entrees">
 					<option value="" id="">Location</option>
-					{% for loc in refrec %}
-
-						<option>{{ loc.location }}</option>
-
-					{% endfor %}
 				</select>                
 		</div>
 
 
-
+	</form>
   <!-- <button id="myBtn" class="button"><span>Send to Recycler </span></button> -->
   	{% if request.user.category == "Manufacturer" %}
-		<button id="myBtn" class="primary-button" style="margin-bottom: -1%;"><span>Send to Refurbisher</span></button>
-		<button id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
+		<button type="submit" id="myBtn" class="primary-button" style="margin-bottom: 5%;"><span>Send</span></button>
 	{% elif request.user.category == "Recycler" %}
-		<button id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
+		<button type="submit" id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
 	{% elif request.user.category == "Refurbisher" %}
 		<button id="myBtn" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
-		<button id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
+		<button type="submit" id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
 	{% endif %}
 	
 
@@ -90,4 +85,46 @@
       </div>
 	
     </div>
+
+	{% block javascript %}
+    <script>
+    $(".form-control[name='menu']").change(function () {
+        var category = $(".form-control[name='menu']").val();
+
+        $.ajax({
+        type: "GET",
+        url: '{% url "viewdata1" %}',
+        data: {
+            'category': category,
+        },
+        dataType: 'json',
+        success: function (data) {
+			var $el = $("#entrees");
+			$el.empty(); // remove old options
+			$.each(data, function(key,value) {
+				if($(".form-control[name='menu']").val() == "Category"){
+					$el.append($("<option></option>")
+			    	.attr("value", "Location").text("Location"));
+				}
+				else{
+					$.each(value, function(key, value){
+						//console.log(key, value);
+						$el.append($("<option></option>")
+			    		.attr("value", value).text(value));
+					});
+				}
+			});
+
+			
+        },
+        error: function(data){
+           alert("Error!");
+		   $("#entrees").val("Kurla").change();
+           console.log(data);
+        }
+        });
+    });
+    </script>
+    {% endblock %}
+
     {% endblock %}

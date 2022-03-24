@@ -109,16 +109,21 @@ def viewdata(request):
     return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
 
 def transfer(request, uid_list):
+    usr = CustomUser.objects.all()
+    loc = request.POST.get('entrees')
+    for i in usr:
+        if i.location == loc:
+            setUsername = i.username
     transaction = transactions(sender_username = request.user.username,
                             sender_category = request.user.category,
                             uid = json.dumps(uid_list),
-                            receiver_username = request.user.username,
-                            receiver_category = request.user.category )
+                            receiver_username = setUsername,
+                            receiver_category = request.POST.get('menu') )
     transaction.save()
     return render(request, 'dataentry')
 
 def replaceComp(request):
-    return render(request, 'ewt/replace_component.html')
+    return render(request, 'ewt/replace_components.html')
 
 # LOGOUT
 @login_required(login_url='login')
@@ -128,7 +133,77 @@ def logoutUser(request):
 
 
 def test_data(request):
-    data= request.GET.get("type", False)
-    bye = {"Hi":"Fuck oFf", "data":data}
+    if request.method=="GET":
+        disptype = request.GET.get("dispType", False)
+        dispspec = request.GET.get("dispSpec", False)
 
-    return JsonResponse(bye)
+        ramtype = request.GET.get("ramType", False)
+        ramspec = request.GET.get("ramSpec", False)
+
+        hddtype = request.GET.get("hddType", False)
+        hddspec = request.GET.get("hddSpec", False)
+
+        ssdtype = request.GET.get("ssdType", False)
+        ssdspec = request.GET.get("ssdSpec", False)
+
+        proctype = request.GET.get("procType", False)
+        procspec = request.GET.get("procSpec", False)
+
+        graphicstype = request.GET.get("graphicsType", False)
+        graphicsspec = request.GET.get("graphicsSpec", False)
+
+        batterytype = request.GET.get("batteryType", False)
+        batteryspec = request.GET.get("batterySpec", False)
+
+        if len(disptype)>0 and len(dispspec)>0 and len(ramtype)>0 and len(ramspec)>0 and len(hddtype)>0 and len(hddspec)>0 and len(ssdtype)>0 and len(ssdspec)>0 and len(proctype)>0 and len(procspec)>0 and len(graphicstype)>0 and len(graphicsspec)>0 and len(batterytype)>0 and len(batteryspec)>0:
+            data = {}
+
+            dispPost1 = uid_dict.display_type[disptype]
+            dispPost2 = uid_dict.display_spec[dispspec]
+
+            ramPost1 = uid_dict.ram_type[ramtype]
+            ramPost2 = uid_dict.ram_spec[ramspec]
+
+            hddPost1 = uid_dict.hdd_type[hddtype]
+            hddPost2 = uid_dict.hdd_spec[hddspec]
+
+            ssdPost1 = uid_dict.ssd_type[ssdtype]
+            ssdPost2 = uid_dict.ssd_spec[ssdspec]
+
+            procPost1 = uid_dict.processor_type[proctype]
+            procPost2 = uid_dict.processor_spec[procspec]
+
+            graphicsPost1 = uid_dict.graphics_type[graphicstype]
+            graphicsPost2 = uid_dict.graphics_spec[graphicsspec]
+
+            batteryPost1 = uid_dict.battery_type[batterytype]
+            batteryPost2 = uid_dict.battery_spec[batteryspec]
+
+            dispUid = dispPost1+dispPost2
+            ramUid = ramPost1+ramPost2
+            hddUid = hddPost1+hddPost2
+            ssdUid = ssdPost1+ssdPost2
+            procUid = procPost1+procPost2
+            graphicsUid = graphicsPost1+graphicsPost2
+            batteryUid = batteryPost1+batteryPost2
+            print(dispUid)
+            data = {'dispUid':dispUid, 'ramUid':ramUid, 'hddUid':hddUid, 'ssdUid':ssdUid, 'procUid':procUid, 'graphicsUid':graphicsUid, 'batteryUid':batteryUid}
+        else:
+            data = {'type':'abc'}
+
+        return JsonResponse(data)
+
+def sendToData(request):
+    if request.method=="GET":
+        category = request.GET.get("category", False)
+        setLoc = CustomUser.objects.all()
+        locs = []
+        for i in setLoc:
+            if i.category == category:
+                locs.append(i.location)
+        if len(category)>0:
+            print(category)
+            data = {'location':locs}
+        else:
+            data = {'type':'abc'}
+        return JsonResponse(data)

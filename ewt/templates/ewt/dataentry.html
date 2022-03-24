@@ -24,7 +24,7 @@
                 <td>1</td>
                 <td>Display</td>
                 <td>
-                    <input list="disp_type" name="disp_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="disp_type" name="dispType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="disp_type">
                         {% for type in data %}
                             <option>{{ type }}</option>
@@ -33,7 +33,7 @@
                     </input>
                 </td>
                 <td>
-                   <input list="disp_spec" name="disp_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                   <input list="disp_spec" name="dispSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="disp_spec">
                         {% for type in data1 %}
                             <option>{{ type }}</option>
@@ -42,14 +42,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="display_uid" name="display_uid" value="0001">
+                  <input type="text" id="display_uid" name="display_uid">
                 </td>
             </tr>
             <tr>
                 <td>2</th>
                 <td>RAM</td>
                 <td>
-                    <input list="ram_type" name="ram_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="ram_type" name="ramType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="ram_type">
                         {% for type in data2 %}
                             <option>{{ type }}</option>
@@ -58,7 +58,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="ram_spec" name="ram_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="ram_spec" name="ramSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="ram_spec">
                         {% for type in data3 %}
                             <option>{{ type }}</option>
@@ -67,14 +67,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="ram_uid" name="ram_uid" value="0001">
+                  <input type="text" id="ram_uid" name="ram_uid">
                 </td>
             </tr>
             <tr>
                 <td>3</th>
                 <td>HDD</td>
                 <td>
-                    <input list="hdd_type" name="hdd_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="hdd_type" name="hddType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="hdd_type">
                         {% for type in data4 %}
                             <option>{{ type }}</option>
@@ -83,7 +83,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="hdd_spec" name="hdd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="hdd_spec" name="hddSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="hdd_spec">
                         {% for type in data5 %}
                             <option>{{ type }}</option>
@@ -92,14 +92,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="hdd_uid" name="hdd_uid" value="0001">
+                  <input type="text" id="hdd_uid" name="hdd_uid">
                 </td>
             </tr>
             <tr>
                 <td>4</th>
                 <td>SSD</td>
                 <td>
-                    <input list="ssd_type" name="ssd_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="ssd_type" name="ssdType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="ssd_type">
                         {% for type in data6 %}
                             <option>{{ type }}</option>
@@ -108,7 +108,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="ssd_spec" name="ssd_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="ssd_spec" name="ssdSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="ssd_spec">
                         {% for type in data7 %}
                             <option>{{ type }}</option>
@@ -117,14 +117,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="ssd_uid" name="ssd_uid" value="2001">
+                  <input type="text" id="ssd_uid" name="ssd_uid">
                 </td>
             </tr>
             <tr>
                 <td>5</th>
                 <td>Processor</td>
                 <td>
-                    <input list="processor_type" name="processor_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="processor_type" name="procType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="processor_type">
                         {% for type in data8 %}
                             <option>{{ type }}</option>
@@ -133,7 +133,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="processor_spec" name="processor_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="processor_spec" name="procSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="processor_spec">
                         {% for type in data9 %}
                             <option>{{ type }}</option>
@@ -142,14 +142,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="processor_uid" name="processor_uid" value="1001">
+                  <input type="text" id="processor_uid" name="processor_uid">
                 </td>
             </tr>
             <tr>
                 <td>6</th>
                 <td>Graphics Card</td>
                 <td>
-                    <input list="graphics_type" name="graphics_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="graphics_type" name="graphicsType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="graphics_type">
                         {% for type in data10 %}
                             <option>{{ type }}</option>
@@ -158,7 +158,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="graphics_spec" name="graphics_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="graphics_spec" name="graphicsSpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="graphics_spec">
                         {% for type in data11%}
                             <option>{{ type }}</option>
@@ -167,14 +167,14 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="graphics_uid" name="graphics_uid" value="0011">
+                  <input type="text" id="graphics_uid" name="graphics_uid">
                 </td>
             </tr>
             <tr>
                 <td>7</th>
                 <td>Battery</td>
                 <td>
-                    <input list="battery_type" name="battery_type" placeholder="Select a Component" class="datalist-dropdown">
+                    <input list="battery_type" name="batteryType" placeholder="Select a Component" class="datalist-dropdown">
                     <datalist id="battery_type">
                         {% for type in data12 %}
                             <option>{{ type }}</option>
@@ -183,7 +183,7 @@
                     </input>
                 </td>
                 <td>
-                    <input list="battery_spec" name="battery_spec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <input list="battery_spec" name="batterySpec" placeholder="Select a Specification" class="datalist-dropdown">
                     <datalist id="battery_spec">
                         {% for type in data13 %}
                             <option>{{ type }}</option>
@@ -192,7 +192,7 @@
                     </input>
                 </td>
                 <td>
-                  <input type="text" id="battery_uid" name="battery_uid" value="0001">
+                  <input type="text" id="battery_uid" name="battery_uid">
                   <!-- INSERTED DUMMY VALUE -->
                 </td>
             </tr>
@@ -219,25 +219,64 @@
 
     {% block javascript %}
     <script>
-    $(".datalist-dropdown").change(function () {
-        var type = $(this).val();
+    $(".datalist-dropdown[name='dispType'], .datalist-dropdown[name='dispSpec'], .datalist-dropdown[name='ramType'], .datalist-dropdown[name='ramSpec'], .datalist-dropdown[name='hddType'], .datalist-dropdown[name='hddSpec'], .datalist-dropdown[name='ssdType'], .datalist-dropdown[name='ssdSpec'], .datalist-dropdown[name='procType'], .datalist-dropdown[name='procSpec'], .datalist-dropdown[name='graphicsType'], .datalist-dropdown[name='graphicsSpec'], .datalist-dropdown[name='batteryType'], .datalist-dropdown[name='batterySpec']").change(function () {
+        var dispType = $(".datalist-dropdown[name='dispType']").val();
+        var dispSpec = $(".datalist-dropdown[name='dispSpec']").val();
+        var ramType = $(".datalist-dropdown[name='ramType']").val();
+        var ramSpec = $(".datalist-dropdown[name='ramSpec']").val();
+        var hddType = $(".datalist-dropdown[name='hddType']").val();
+        var hddSpec = $(".datalist-dropdown[name='hddSpec']").val();
+        var ssdType = $(".datalist-dropdown[name='ssdType']").val();
+        var ssdSpec = $(".datalist-dropdown[name='ssdSpec']").val();
+        var procType = $(".datalist-dropdown[name='procType']").val();
+        var procSpec = $(".datalist-dropdown[name='procSpec']").val();
+        var graphicsType = $(".datalist-dropdown[name='graphicsType']").val();
+        var graphicsSpec = $(".datalist-dropdown[name='graphicsSpec']").val();
+        var batteryType = $(".datalist-dropdown[name='batteryType']").val();
+        var batterySpec = $(".datalist-dropdown[name='batterySpec']").val();
         $.ajax({
         type: "GET",
-        url: 'dataentry1',
+        url: '{% url "dataentry1" %}',
         data: {
-            'type': type
+            'dispType': dispType,
+            'dispSpec': dispSpec,
+
+            'ramType': ramType,
+            'ramSpec': ramSpec,
+
+            'hddType': hddType,
+            'hddSpec': hddSpec,
+
+            'ssdType': ssdType,
+            'ssdSpec': ssdSpec,
+
+            'procType': procType,
+            'procSpec': procSpec,
+
+            'graphicsType': graphicsType,
+            'graphicsSpec': graphicsSpec,
+
+            'batteryType': batteryType,
+            'batterySpec': batterySpec,
+            
         },
         dataType: 'json',
         success: function (data) {
-            alert("Boble");
             console.log(data);
-            $("display_uid").val() = "0004";
+            $("#display_uid").val(data['dispUid']);
+            $("#ram_uid").val(data['ramUid']);
+            $("#hdd_uid").val(data['hddUid']);
+            $("#ssd_uid").val(data['ssdUid']);
+            $("#processor_uid").val(data['procUid']);
+            $("#graphics_uid").val(data['graphicsUid']);
+            $("#battery_uid").val(data['batteryUid']);
+
         },
         error: function(data){
-           alert("Bobla");
+           alert("Error!");
+           console.log(data);
         }
         });
-
     });
     </script>
     {% endblock %}

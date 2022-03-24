@@ -9,5 +9,6 @@ urlpatterns = [
     path('dataentry/', views.dataEntry, name='dataentry'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('viewdata/', views.viewdata, name='viewdata'),
-    path('replacecomponents/', views.replaceComp, name='replacecomponents')
+    path('viewdata1', views.sendToData, name='viewdata1'),
+    path('replace/', views.replaceComp, name='replacecomponents')
 ]
