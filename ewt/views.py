@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.db import IntegrityError, models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from .models import CustomUser, manuData, save_uid, transactions
+from .models import CustomUser, manuData, save_uid, transactions, uid_status
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password
@@ -51,6 +51,7 @@ def dataEntry(request):
         battery_uid = request.POST.get('battery_uid')
         uid_list = [display_uid, ram_uid, hdd_uid, ssd_uid, processor_uid, graphics_uid, battery_uid]
         saveUid(uid_list, request)
+        uidStatus(uid_list, request)
 
         compUid.save()
 
@@ -61,6 +62,12 @@ def dataEntry(request):
                                                     'data8': uid_dict.processor_type, 'data9': uid_dict.processor_spec, 
                                                     'data10' : uid_dict.graphics_type, 'data11': uid_dict.graphics_spec, 
                                                     'data12': uid_dict.battery_type, 'data13': uid_dict.battery_spec})
+
+def uidStatus(uid_list, request):
+    save_main_uid = uid_status(username = request.user.username,
+                            category = request.user.category,
+                            uid = json.dumps(uid_list))
+    save_main_uid.save()
 
 def saveUid(uid_list, request):
     save_main_uid = save_uid(username = request.user.username,
@@ -103,9 +110,9 @@ def dashboard(request):
     return render(request, 'ewt/dashboard.html')
 
 def viewdata(request):
-    usr = CustomUser.objects.all()
-    logs = save_uid.objects.all()
-    refrec = CustomUser.objects.all()
+    # usr = transactions.objects.all()
+    logs = uid_status.objects.all()
+    refrec = transactions.objects.all()
 
     ids = save_uid.objects.all()
     id = []
@@ -116,8 +123,8 @@ def viewdata(request):
         if resp:
             id.append(i.uid_list) 
     print(id)               
-    loc = request.POST.get("entrees")
-    cat = request.POST.get("menu")
+    loc = request.POST.get("location_dd")
+    cat = request.POST.get("category_dd")
     print('location:',loc,'cat',cat)
     # for i in usr:
     #     if i.location == loc:
@@ -126,7 +133,7 @@ def viewdata(request):
     #                         sender_category = request.user.category,
     #                         uid = json.dumps(uid_list),
     #                         receiver_username = setUsername,
-    #                         receiver_category = request.POST.get('menu') )
+    #                         receiver_category = request.POST.get('category_dd') )
     # transaction.save()
 
     return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
@@ -141,7 +148,7 @@ def transfer(request, uid_list):
     #     # if resp:
     #     #     id.append(resp) 
     # print(id)               
-    # loc = request.POST.get('entrees')
+    # loc = request.POST.get('location_dd')
     # for i in usr:
     #     if i.location == loc:
     #         setUsername = i.username
@@ -149,7 +156,7 @@ def transfer(request, uid_list):
     #                         sender_category = request.user.category,
     #                         uid = json.dumps(uid_list),
     #                         receiver_username = setUsername,
-    #                         receiver_category = request.POST.get('menu') )
+    #                         receiver_category = request.POST.get('category_dd') )
     # transaction.save()
     return render(request, 'dataentry')
 
@@ -227,14 +234,24 @@ def test_data(request):
 def sendToData(request):
     if request.method=="GET":
         category = request.GET.get("category", False)
+        location = request.GET.get("location", False)
         setLoc = CustomUser.objects.all()
         locs = []
+        comp_names = []
         for i in setLoc:
             if i.category == category:
-                locs.append(i.location)
+                if i.location not in locs:
+                    locs.append(i.location)
+                # for j in setLoc:
+        for i in setLoc:
+            if i.category == category and i.location == location:
+                if i.company_name not in comp_names:
+                    comp_names.append(i.company_name)
+        print(locs, comp_names)
         if len(category)>0:
             print(category)
-            data = {'location':locs}
+            print(location)
+            data = {'location':locs, 'company_name':comp_names}
         else:
             data = {'type':'abc'}
         return JsonResponse(data)
@@ -250,7 +267,7 @@ def sendData(request):
         d ={'hii':'hue'}
         nums = category.split(',')
         for i in usr:
-            if i.location == receiver_location:
+            if i.location == receiver_location and i.category == receiver_category:
                 setUsername = i.username
                 break
         for num in nums:

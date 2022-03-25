@@ -21,22 +21,33 @@
     			  	<th> <input type="checkbox" class="checkbox" >
     			  	  <span class="checkmark"></span></th>
     			</tr>
-				{% for uid in logs %}
-					{% if uid.username == request.user.username %}
-						<tr>
-    					  <td id="test" value='{{ uid.id }}'>{{ uid.id }}</td>
-    					  <td><a href="{% url 'replacecomponents' %}">{{ uid.uid_list }}</a></td>
-    					  <td><input type="checkbox" name="{{ uid.id }}" class="checkbox">
-    					    <span class="checkmark"></span></td>
-    					</tr>
-					{% endif %}
+				{% for record in refrec %}
+				{% if record.receiver_username == request.user.username %}
+					<tr>
+						<td id="test" value='{{ record.id }}'>{{ record.id }}</td>
+						<td><a href="{% url 'replacecomponents' %}">{{ record.uid }}</a></td>
+						<td><input type="checkbox" name="{{ record.id }}" class="checkbox">
+						<span class="checkmark"></span></td>
+					</tr>
+				{% endif %}
 				{% endfor %}
+
+					{% for uid in logs %}
+						{% if uid.username == request.user.username %}
+							<tr>
+    						  <td id="test" value='{{ uid.id }}'>{{ uid.id }}</td>
+    						  <td><a href="{% url 'replacecomponents' %}">{{ uid.uid}}</a></td>
+    						  <td><input type="checkbox" name="{{ uid.id }}" class="checkbox">
+    						    <span class="checkmark"></span></td>
+    						</tr>
+						{% endif %}
+					{% endfor %}
     		</table>
     	</section>
 		<div class="form-group">
 			<!-- <label for="category">Category</label> -->
 			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
-				<select required class="form-control" form="registration" name="menu">
+				<select required class="form-control" form="registration" name="category_dd">
 					<option>Category</option>
 					{% if request.user.category == "Manufacturer" %}
 						<option value="Recycler" id="RC">Recycler</option>
@@ -52,9 +63,12 @@
 		<div class="form-group">
 			<!-- <label for="category">Category</label> -->
 			<!-- <input list="category" name="category" placeholder="Select a Category" class="form-control"> -->
-				<select required class="form-control" form="registration" name="entrees" id="entrees">
+				<select required class="form-control" name="location_dd" id="location_dd">
 					<option value="" id="">Location</option>
-				</select>                
+				</select>
+				<select required class="form-control" name="company_name_dd" id="company_name_dd">
+					<option value="" id="">Company Name</option>
+				</select>
 		</div>
 
 		<!-- <button id="myBtn" class="button"><span>Send to Recycler </span></button> -->
@@ -90,38 +104,47 @@
 
 	{% block javascript %}
     <script>
-    $(".form-control[name='menu']").change(function () {
-        var category = $(".form-control[name='menu']").val();
-
+    $(".form-control[name='category_dd'], .form-control[name='location_dd']").change(function () {
+        var category = $(".form-control[name='category_dd']").val();
+		var location = $(".form-control[name='location_dd']").val();
         $.ajax({
         type: "GET",
         url: '{% url "viewdata1" %}',
         data: {
             'category': category,
+			'location' : location
         },
         dataType: 'json',
         success: function (data) {
-			var $el = $("#entrees");
+			var $el = $("#location_dd");
+			var $el2 = $("#company_name_dd");
 			$el.empty(); // remove old options
+			$el2.empty();
 			$.each(data, function(key,value) {
-				if($(".form-control[name='menu']").val() == "Category"){
-					$el.append($("<option></option>")
-			    	.attr("value", "Location").text("Location"));
+				console.log(key);
+				if($(".form-control[name='category_dd']").val() == "Category"){
+					$el.empty();
+					$el2.empty();
+					
 				}
 				else{
-					$.each(value, function(key, value){
-						//console.log(key, value);
-						$el.append($("<option></option>")
-			    		.attr("value", value).text(value));
-					});
-				}
-			});
+					if(key=="location"){
 
-			
+						$.each(value, function(key, value){
+								$el.append($("<option></option>")
+			    				.attr("value", value).text(value));})
+					}
+					else if(key=="company_name"){
+						$.each(value, function(key, value){
+							$el2.append($("<option></option>")
+							.attr("value", value).text(value));})
+					}
+				}
+					});
         },
         error: function(data){
            alert("Error!");
-		   $("#entrees").val("Kurla").change();
+		   $("#location_dd").val("Kurla").change();
            console.log(data);
         }
         });
@@ -134,8 +157,8 @@
         url: '{% url "senddata" %}',
         data: {
             'category': '2,4,5',
-			'receiver_category': $(".form-control[name='menu']").val(),
-			'receiver_location':$(".form-control[name='entrees']").val()
+			'receiver_category': $(".form-control[name='category_dd']").val(),
+			'receiver_location':$(".form-control[name='location_dd']").val()
         },
         dataType: 'json',
         success: function (data) {
@@ -151,7 +174,7 @@
         // },
         // error: function(data){
         //    alert("Error!");
-		//    $("#entrees").val("Kurla").change();
+		//    $("#location_dd").val("Kurla").change();
         //    console.log(data);
         // }
         // });
