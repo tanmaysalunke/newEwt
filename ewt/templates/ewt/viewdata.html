@@ -18,30 +18,20 @@
     			<tr>
     			  	<th>Sr. No.</th>
     			  	<th>Laptops</th>
-    			  	<th> <input type="checkbox" class="checkbox" >
+    			  	<th> <input type="checkbox" class="checkbox" name="select-all" id="select-all">
     			  	  <span class="checkmark"></span></th>
     			</tr>
-				{% for record in refrec %}
-				{% if record.receiver_username == request.user.username %}
-					<tr>
-						<td id="test" value='{{ record.id }}'>{{ record.id }}</td>
-						<td><a href="{% url 'replacecomponents' %}">{{ record.uid }}</a></td>
-						<td><input type="checkbox" name="{{ record.id }}" class="checkbox">
-						<span class="checkmark"></span></td>
-					</tr>
-				{% endif %}
+				{% for record in logs %}
+					{% if record.username == request.user.username %}
+						<tr>
+    					  <td id="test" value='{{ record.id }}'>{{ record.id }}</td>
+    					  <td><a href="{% url 'replacecomponents' %}">{{ record.uid}}</a></td>
+    					  <td><input type="checkbox" value="{{ record.id }}" name="chk" class="checkbox">
+    					    <span class="checkmark"></span></td>
+    					</tr>
+					{% endif %}
 				{% endfor %}
 
-					{% for uid in logs %}
-						{% if uid.username == request.user.username %}
-							<tr>
-    						  <td id="test" value='{{ uid.id }}'>{{ uid.id }}</td>
-    						  <td><a href="{% url 'replacecomponents' %}">{{ uid.uid}}</a></td>
-    						  <td><input type="checkbox" name="{{ uid.id }}" class="checkbox">
-    						    <span class="checkmark"></span></td>
-    						</tr>
-						{% endif %}
-					{% endfor %}
     		</table>
     	</section>
 		<div class="form-group">
@@ -78,7 +68,7 @@
 			<button type="submit" id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
 		{% elif request.user.category == "Refurbisher" %}
 			<button id="myBtn" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
-			<button type="submit" id="myBtn" class="primary-button"><span>Send to Recycler</span></button>
+			<button type="submit" id="myBtn" class="primary-button"><span>Send</span></button>
 		{% endif %}
 
 
@@ -121,7 +111,6 @@
 			$el.empty(); // remove old options
 			$el2.empty();
 			$.each(data, function(key,value) {
-				console.log(key);
 				if($(".form-control[name='category_dd']").val() == "Category"){
 					$el.empty();
 					$el2.empty();
@@ -150,27 +139,62 @@
         });
     });
 
+	var ids_array = [];
+
+	$('#select-all').click(function() {   
+		if(this.checked) {
+			// Iterate each checkbox
+			$(':checkbox').each(function() {
+				this.checked = true;
+				console.log($(this).val())
+				ids_array.push($(this).val())
+			});
+		} else {
+			$(':checkbox').each(function() {
+				this.checked = false;  
+				for(var i=0; i<ids_array.length; i++){
+					if ( ids_array[i] === ($(this).val()) ) { 
+						ids_array.splice(i, 1); 
+						i--; 
+					};
+				}                
+			});
+		}
+	});
+
+	$(".checkbox[name='chk']").click(function() {
+		if(this.checked){
+			console.log($(this).val())
+			ids_array.push($(this).val())
+		}
+		else{
+			for(var i=0; i<ids_array.length; i++){
+				if ( ids_array[i] === ($(this).val()) ) { 
+					ids_array.splice(i, 1); 
+					i--; 
+				};
+			}
+		}
+		console.log(ids_array)
+	});
+	
 
 	$("#myBtn").click(function () {
 		$.ajax({
-        type: "GET",
-        url: '{% url "senddata" %}',
-        data: {
-            'category': '2,4,5',
-			'receiver_category': $(".form-control[name='category_dd']").val(),
-			'receiver_location':$(".form-control[name='location_dd']").val()
-        },
-        dataType: 'json',
-        success: function (data) {
-			alert("Sent Successfully!") 
+        	type: "GET",
+        	url: '{% url "senddata" %}',
+        	data: {
+        	    'category[]': ids_array,
+				'receiver_category': $(".form-control[name='category_dd']").val(),
+				'receiver_location':$(".form-control[name='location_dd']").val()
+        	},
+        	dataType: 'json',
+        	success: function (data) {
+				alert("Sent Successfully!")
+				console.log(data)
 			}
 		});
 	});
-
-
-       
-
-			
         // },
         // error: function(data){
         //    alert("Error!");
@@ -180,7 +204,7 @@
         // });
     // });
 
-
+	
     </script>
     {% endblock %}
 

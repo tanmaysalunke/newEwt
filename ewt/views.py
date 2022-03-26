@@ -260,23 +260,30 @@ def sendToData(request):
 def sendData(request):
     if request.method=="GET":
         usr = CustomUser.objects.all()
-        category = request.GET.get("category")
+        category = request.GET.getlist  ('category[]')
         receiver_category = request.GET.get("receiver_category")
         receiver_location = request.GET.get("receiver_location")
-        print("HI ",category.split(','), " ", receiver)
         d ={'hii':'hue'}
-        nums = category.split(',')
+        nums = []
+        for num in category:
+            if num!='on':
+                nums.append(num)
         for i in usr:
             if i.location == receiver_location and i.category == receiver_category:
                 setUsername = i.username
+                print(setUsername)
                 break
+        print(nums)
         for num in nums:
-            log = save_uid.objects.get(id=num)
+            log = uid_status.objects.get(id=num)
+            log.username = setUsername
+            log.category = receiver_category
             transaction = transactions(sender_username = request.user.username,
                             sender_category = request.user.category,
-                            uid = json.dumps(log.uid_list),
+                            uid = json.dumps(log.uid),
                             receiver_username = setUsername,
                             receiver_category = receiver_category )
             transaction.save()
+            log.save()
             print(log)
         return JsonResponse(d)
