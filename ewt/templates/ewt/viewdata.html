@@ -63,9 +63,9 @@
 		{% if request.user.category == "Manufacturer" %}
 			<button type="submit" id="myBtn" class="primary-button" style="margin-bottom: 5%;"><span>Send</span></button>
 		{% elif request.user.category == "Recycler" %}
-			<button type="submit" id="myBtn" class="primary-button"><span>Mark as Recycled</span></button>
+			<button type="submit" id="myBtn2" class="primary-button"><span>Mark as Recycled</span></button>
 		{% elif request.user.category == "Refurbisher" %}
-			<button id="markRef" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
+			<button id="myBtn2" class="primary-button" style="margin-bottom: -1%;"><span>Mark as Refurbished</span></button>
 			<button type="submit" id="myBtn" class="primary-button"><span>Send</span></button>
 		{% endif %}
 
@@ -171,6 +171,25 @@
         	dataType: 'json',
         	success: function (data) {
 				alert("Sent Successfully!")
+				console.log(data)
+			},
+			error: function(data){
+				alert("Error!");
+				console.log(data);
+			}
+		});
+	});
+
+	$("#myBtn2").click(function () {
+		$.ajax({
+        	type: "GET",
+        	url: '{% url "recycled" %}',
+        	data: {
+        	    'category[]': ids_array,
+        	},
+        	dataType: 'json',
+        	success: function (data) {
+				alert("Maked as Recycled!")
 				console.log(data)
 			},
 			error: function(data){

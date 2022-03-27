@@ -11,6 +11,7 @@ urlpatterns = [
     path('viewdata/', views.viewdata, name='viewdata'),
     path('viewdata1', views.sendToData, name='viewdata1'),
     path('replace/<int:pk>/', views.replaceComp, name='replace'),
+    path('recycled', views.recycled, name='recycled'),
     path('senddata', views.sendData, name='senddata')
     # path('replaceAjax', views.replaceAjax, name='replaceAjax')
 ]

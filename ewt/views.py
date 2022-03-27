@@ -298,3 +298,16 @@ def sendData(request):
             log.save()
             print(log)
         return JsonResponse(d)
+
+def recycled(request):
+    if request.method=="GET":
+        category = request.GET.getlist  ('category[]')
+        nums = []
+        for num in category:
+            if num!='on':
+                nums.append(num)
+        for num in nums:
+            log = uid_status.objects.get(id=num)
+        log.delete()
+        d ={'hii': category}
+        return JsonResponse(d)
