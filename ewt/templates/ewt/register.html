@@ -60,14 +60,14 @@
                 <input type="password" id="password2" name="password2" class="form-control" value="" placeholder="Confirm Password" required>
                 <span class="invalid-feedback"></span>
             </div>
-            {% if messages %}
-                <ul class="messages list-unstyled">
+            <br>
+            <br>
+                {% if messages %}
                     {% for message in messages %}
-                        {% if message.tags %}
-                        <li class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                      <h6 class="{{ message.tags }}" style="text-align: center; color: red;" >{{ message }}</h6>
                     {% endfor %}
-                </ul>
-            {% endif %}
+                {% endif %}
+            <br>
             <div class="form-group">
                 <button type="submit" class="primary-button" id="form-button">Register</button>
             </div>

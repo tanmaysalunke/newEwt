@@ -17,7 +17,8 @@ import json
 
 def registerPage(request):
     if request.method == 'POST':
-        user_reg = CustomUser.objects.create_user(first_name=request.POST.get('first_name'),
+        try:
+            user_reg = CustomUser.objects.create_user(first_name=request.POST.get('first_name'),
                         last_name=request.POST.get('last_name'),
                         password=request.POST.get('password1'),
                         email=request.POST.get('email'),
@@ -25,7 +26,6 @@ def registerPage(request):
                         location=request.POST.get('location'),
                         company_name=request.POST.get('company_name'),
                         category=request.POST.get('access_level'))
-        try:
             user_reg.save()
             return redirect(loginPage)
         except IntegrityError:
