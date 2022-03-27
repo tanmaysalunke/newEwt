@@ -1,124 +1,265 @@
 {% extends 'base.html' %}
-{% block title %} Register {% endblock %}
+{% block title %} Replace Components {% endblock %}
     {% block content %}
     <section class="page-heading">
         <h2>Replace Components</h2>
     </section>
 
+    <form id="comp_uid" method="post" >
+        {% csrf_token %}
     <table>
         <tr>
-          <th scope="col">Component UID</th>
-          <th scope="col">Old Component Type and Spec</th>
-          <th scope="col" class="center">New Component Type and Spec</th>
+          <th scope="col" class="center">Component UID</th>
+          <th scope="col" class="center">New Component Type</th>
+          <th scope="col" class="center">New Component Specifications</th>
+          <th scope="col" class="center">New Component UID</th>
         </tr>
+        <!-- display -->
         <tr>
-          <td>1</th>
-          <td>Display</td>
+          <td>{{ array_0 }}</th>
           <td>
-            <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                <datalist id="components">
-                    <option value="Comp 1"></option>
-                    <option value="Comp 2"></option>
-                    <option value="Comp 3"></option>
+            <input list="disp_type" name="dispType" placeholder="Select a Component" class="datalist-dropdown">
+                    <datalist id="disp_type">
+                        {% for type in data %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+          </td>
+          <td>
+            <input list="disp_spec" name="dispSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="disp_spec">
+                        {% for type in data1 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+          </td>
+          <td>
+            <input type="text" id="display_uid" name="display_uid">
+          </td>
+        </tr>
+        <!-- ram -->
+        <tr>
+            <td>{{ array_1 }}</th>
+            <td>
+                <input list="ram_type" name="ramType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="ram_type">
+                    {% for type in data2 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
                 </datalist>
-            </input>
-          </td>
-        </tr>
+                </input>
+            </td>
+            <td>
+                <input list="ram_spec" name="ramSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="ram_spec">
+                    {% for type in data3 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input type="text" id="ram_uid" name="ram_uid">
+              </td>
+          </tr>
+          <!-- hdd -->
         <tr>
-          <td>2</th>
-          <td>RAM</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
+            <td>{{ array_2 }}</th>
+            <td>
+                <input list="hdd_type" name="hddType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="hdd_type">
+                    {% for type in data4 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input list="hdd_spec" name="hddSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                    <datalist id="hdd_spec">
+                        {% for type in data5 %}
+                            <option>{{ type }}</option>
+                        {% endfor %}
+                    </datalist>
+                    </input>
+            </td>
+            <td>
+                <input type="text" id="hdd_uid" name="hdd_uid">
+              </td>
+          </tr>
+          <!-- ssd -->
         <tr>
-          <td>3</th>
-          <td>HDD</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
+            <td>{{ array_3 }}</th>
+            <td>
+                <input list="ssd_type" name="ssdType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="ssd_type">
+                    {% for type in data6 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input list="ssd_spec" name="ssdSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="ssd_spec">
+                    {% for type in data7 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input type="text" id="ssd_uid" name="ssd_uid">
+              </td>
+          </tr>
+          <!-- processor -->
         <tr>
-          <td>4</th>
-          <td>SSD</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
+            <td>{{ array_4 }}</th>
+            <td>
+                <input list="processor_type" name="procType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="processor_type">
+                    {% for type in data8 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input list="processor_spec" name="procSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="processor_spec">
+                    {% for type in data9 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input type="text" id="processor_uid" name="processor_uid">
+              </td>
+          </tr>
+          <!-- graphics -->
         <tr>
-          <td>5</th>
-          <td>Processor</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
+            <td>{{ array_5 }}</th>
+            <td>
+                <input list="graphics_type" name="graphicsType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="graphics_type">
+                    {% for type in data10 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input list="graphics_spec" name="graphicsSpec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="graphics_spec">
+                    {% for type in data11%}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input type="text" id="graphics_uid" name="graphics_uid">
+              </td>
+          </tr>
+          <!-- battery -->
         <tr>
-          <td>6</th>
-          <td>Graphics Card</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
-        <tr>
-          <td>7</th>
-          <td>Battery</td>
-          <td>
-              <input list="components" name="components" placeholder="Select a Component" class="datalist-dropdown">
-                  <datalist id="components">
-                      <option value="Comp 1"></option>
-                      <option value="Comp 2"></option>
-                      <option value="Comp 3"></option>
-                  </datalist>
-              </input>
-          </td>
-        </tr>
+            <td>{{ array_6 }}</th>
+            <td>
+                <input list="battery_type" name="batteryType" placeholder="Select a Component" class="datalist-dropdown">
+                <datalist id="battery_type">
+                    {% for type in data12 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input list="battery_spec" name="batterySpec" placeholder="Select a Specification" class="datalist-dropdown">
+                <datalist id="battery_spec">
+                    {% for type in data13 %}
+                        <option>{{ type }}</option>
+                    {% endfor %}
+                </datalist>
+                </input>
+            </td>
+            <td>
+                <input type="text" id="battery_uid" name="battery_uid">
+              </td>
+          </tr>
+
     </table>
     
-    <button id="myBtn" class="primary-button"><span>Replace Items</span></button>
+    <button type="submit" id="myBtn" class="primary-button"><span>Replace Items</span></button>
+    </form>
 
-  	<!-- The Modal -->
-  	<div id="myModal" class="modal">
-	
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h1>Successfully replaced items</h1>
-        <!-- <p>Do you want to send these laptops to the Recycler?</p>
-        <div id="modal-button">
-			<button id="modal-button-cancel">Cancel</button>
-        	<button id="modal-button-confirm">Send to Recycler</button>
-		</div> -->
-      </div>
-	
-    </div>
+
+    {% block javascript %}
+    <script>
+    $(".datalist-dropdown[name='dispType'], .datalist-dropdown[name='dispSpec'], .datalist-dropdown[name='ramType'], .datalist-dropdown[name='ramSpec'], .datalist-dropdown[name='hddType'], .datalist-dropdown[name='hddSpec'], .datalist-dropdown[name='ssdType'], .datalist-dropdown[name='ssdSpec'], .datalist-dropdown[name='procType'], .datalist-dropdown[name='procSpec'], .datalist-dropdown[name='graphicsType'], .datalist-dropdown[name='graphicsSpec'], .datalist-dropdown[name='batteryType'], .datalist-dropdown[name='batterySpec']").change(function () {
+        var dispType = $(".datalist-dropdown[name='dispType']").val();
+        var dispSpec = $(".datalist-dropdown[name='dispSpec']").val();
+        var ramType = $(".datalist-dropdown[name='ramType']").val();
+        var ramSpec = $(".datalist-dropdown[name='ramSpec']").val();
+        var hddType = $(".datalist-dropdown[name='hddType']").val();
+        var hddSpec = $(".datalist-dropdown[name='hddSpec']").val();
+        var ssdType = $(".datalist-dropdown[name='ssdType']").val();
+        var ssdSpec = $(".datalist-dropdown[name='ssdSpec']").val();
+        var procType = $(".datalist-dropdown[name='procType']").val();
+        var procSpec = $(".datalist-dropdown[name='procSpec']").val();
+        var graphicsType = $(".datalist-dropdown[name='graphicsType']").val();
+        var graphicsSpec = $(".datalist-dropdown[name='graphicsSpec']").val();
+        var batteryType = $(".datalist-dropdown[name='batteryType']").val();
+        var batterySpec = $(".datalist-dropdown[name='batterySpec']").val();
+        var id = 
+        $.ajax({
+        type: "GET",
+        url: '{% url "dataentry1" %}',
+        data: {
+            'dispType': dispType,
+            'dispSpec': dispSpec,
+
+            'ramType': ramType,
+            'ramSpec': ramSpec,
+
+            'hddType': hddType,
+            'hddSpec': hddSpec,
+
+            'ssdType': ssdType,
+            'ssdSpec': ssdSpec,
+
+            'procType': procType,
+            'procSpec': procSpec,
+
+            'graphicsType': graphicsType,
+            'graphicsSpec': graphicsSpec,
+
+            'batteryType': batteryType,
+            'batterySpec': batterySpec,
+
+            'id' : id,
+            
+        },
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $("#display_uid").val(data['dispUid']);
+            $("#ram_uid").val(data['ramUid']);
+            $("#hdd_uid").val(data['hddUid']);
+            $("#ssd_uid").val(data['ssdUid']);
+            $("#processor_uid").val(data['procUid']);
+            $("#graphics_uid").val(data['graphicsUid']);
+            $("#battery_uid").val(data['batteryUid']);
+
+        },
+        error: function(data){
+           alert("Error!");
+           console.log(data);
+        }
+        });
+    });
+    </script>
     {% endblock %}
+{% endblock %}

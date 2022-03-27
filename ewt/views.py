@@ -1,3 +1,4 @@
+from tkinter.messagebox import askretrycancel
 from django.dispatch import receiver
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -138,30 +139,54 @@ def viewdata(request):
 
     return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
 
-def transfer(request, uid_list):
-    usr = CustomUser.objects.all()
-    # ids = save_uid.objects.all()
-    # id = []
-    # for i in ids:
-    #     id.append(i.id)
-    #     # resp = request.POST.get(i.id,False)
-    #     # if resp:
-    #     #     id.append(resp) 
-    # print(id)               
-    # loc = request.POST.get('location_dd')
-    # for i in usr:
-    #     if i.location == loc:
-    #         setUsername = i.username
-    # transaction = transactions(sender_username = request.user.username,
-    #                         sender_category = request.user.category,
-    #                         uid = json.dumps(uid_list),
-    #                         receiver_username = setUsername,
-    #                         receiver_category = request.POST.get('category_dd') )
-    # transaction.save()
+def transfer(request):
     return render(request, 'dataentry')
 
-def replaceComp(request):
-    return render(request, 'ewt/replace_components.html')
+def replaceComp(request, pk):
+    logs = uid_status.objects.get(id=pk)
+    array = []
+    array = json.loads(logs.uid)
+    array_0 = array[0]
+    array_1 = array[1]
+    array_2 = array[2]
+    array_3 = array[3]
+    array_4 = array[4]
+    array_5 = array[5]
+    array_6 = array[6]
+
+    newArray = []
+    print(array_0)
+    for j in array:
+        x = j[:2]
+        y = j[2:]
+        newArray.append(x)
+        newArray.append(y)
+
+    if request.method == 'POST':
+        display_uid = request.POST.get('display_uid')
+        ram_uid = request.POST.get('ram_uid')
+        hdd_uid = request.POST.get('hdd_uid')
+        ssd_uid = request.POST.get('ssd_uid')
+        processor_uid = request.POST.get('processor_uid')
+        graphics_uid = request.POST.get('graphics_uid')
+        battery_uid = request.POST.get('battery_uid')
+        uid_list = [display_uid, ram_uid, hdd_uid, ssd_uid, processor_uid, graphics_uid, battery_uid]
+
+        logs.modified = True
+        logs.uid = json.dumps(uid_list)
+        logs.save()
+
+    return render(request, 'ewt/replace_components.html', {'logs':logs, 'array_0':array_0, 'array_1':array_1, 'array_2':array_2,
+                                                        'array_3':array_3, 'array_4':array_4, 'array_5':array_5, 'array_6':array_6,
+                                                        'newArray': newArray, 'uid_dict': uid_dict,
+                                                        'data' : uid_dict.display_type, 'data1': uid_dict.display_spec, 
+                                                        'data2': uid_dict.ram_type,'data3': uid_dict.ram_spec, 
+                                                        'data4' : uid_dict.hdd_type, 'data5': uid_dict.hdd_spec, 
+                                                        'data6': uid_dict.ssd_type, 'data7' : uid_dict.ssd_spec, 
+                                                        'data8': uid_dict.processor_type, 'data9': uid_dict.processor_spec, 
+                                                        'data10' : uid_dict.graphics_type, 'data11': uid_dict.graphics_spec, 
+                                                        'data12': uid_dict.battery_type, 'data13': uid_dict.battery_spec})
+    
 
 # LOGOUT
 @login_required(login_url='login')
@@ -174,49 +199,34 @@ def test_data(request):
     if request.method=="GET":
         disptype = request.GET.get("dispType", False)
         dispspec = request.GET.get("dispSpec", False)
-
         ramtype = request.GET.get("ramType", False)
         ramspec = request.GET.get("ramSpec", False)
-
         hddtype = request.GET.get("hddType", False)
         hddspec = request.GET.get("hddSpec", False)
-
         ssdtype = request.GET.get("ssdType", False)
         ssdspec = request.GET.get("ssdSpec", False)
-
         proctype = request.GET.get("procType", False)
         procspec = request.GET.get("procSpec", False)
-
         graphicstype = request.GET.get("graphicsType", False)
         graphicsspec = request.GET.get("graphicsSpec", False)
-
         batterytype = request.GET.get("batteryType", False)
         batteryspec = request.GET.get("batterySpec", False)
-
         if len(disptype)>0 and len(dispspec)>0 and len(ramtype)>0 and len(ramspec)>0 and len(hddtype)>0 and len(hddspec)>0 and len(ssdtype)>0 and len(ssdspec)>0 and len(proctype)>0 and len(procspec)>0 and len(graphicstype)>0 and len(graphicsspec)>0 and len(batterytype)>0 and len(batteryspec)>0:
             data = {}
-
             dispPost1 = uid_dict.display_type[disptype]
             dispPost2 = uid_dict.display_spec[dispspec]
-
             ramPost1 = uid_dict.ram_type[ramtype]
             ramPost2 = uid_dict.ram_spec[ramspec]
-
             hddPost1 = uid_dict.hdd_type[hddtype]
             hddPost2 = uid_dict.hdd_spec[hddspec]
-
             ssdPost1 = uid_dict.ssd_type[ssdtype]
             ssdPost2 = uid_dict.ssd_spec[ssdspec]
-
             procPost1 = uid_dict.processor_type[proctype]
             procPost2 = uid_dict.processor_spec[procspec]
-
             graphicsPost1 = uid_dict.graphics_type[graphicstype]
             graphicsPost2 = uid_dict.graphics_spec[graphicsspec]
-
             batteryPost1 = uid_dict.battery_type[batterytype]
             batteryPost2 = uid_dict.battery_spec[batteryspec]
-
             dispUid = dispPost1+dispPost2
             ramUid = ramPost1+ramPost2
             hddUid = hddPost1+hddPost2
@@ -263,7 +273,8 @@ def sendData(request):
         category = request.GET.getlist  ('category[]')
         receiver_category = request.GET.get("receiver_category")
         receiver_location = request.GET.get("receiver_location")
-        d ={'hii':'hue'}
+        uid_id = request.GET.get("uid_id")
+        d ={'hii': uid_id}
         nums = []
         for num in category:
             if num!='on':
