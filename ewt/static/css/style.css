@@ -6,6 +6,7 @@ nav
 {
   background-color: #b3ff99;
   height: 70px;
+  padding: 0% 2% 2% 2%;
 }
 
 nav .welcome-msg
@@ -14,10 +15,21 @@ nav .welcome-msg
   font-size: large;
   margin-top: 1%;
   margin-left: 1%;
-  padding: 0.5% 1% 0.5% 1%;
+  padding: 0% 1% 0% 1%;
   /* float: left; */
+  /* background-color: #abc; */
   width: 15%;
 }
+
+/* nav .user-loc
+{
+  clear: left;
+  font-size: large;
+  margin-top: 1%;
+  margin-left: 1%;
+  padding: 0.5% 1% 0.5% 1%;
+  width: 15%;
+} */
 
 nav a
 {

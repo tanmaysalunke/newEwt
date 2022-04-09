@@ -126,17 +126,7 @@ def viewdata(request):
     print(id)               
     loc = request.POST.get("location_dd")
     cat = request.POST.get("category_dd")
-    print('location:',loc,'cat',cat)
-    # for i in usr:
-    #     if i.location == loc:
-    #         setUsername = i.username
-    # transaction = transactions(sender_username = request.user.username,
-    #                         sender_category = request.user.category,
-    #                         uid = json.dumps(uid_list),
-    #                         receiver_username = setUsername,
-    #                         receiver_category = request.POST.get('category_dd') )
-    # transaction.save()
-
+    # print('location:',loc,'cat',cat)
     return render(request, 'ewt/viewdata.html', {'logs': logs, 'refrec' : refrec})
 
 def transfer(request):

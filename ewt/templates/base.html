@@ -18,8 +18,11 @@
     <nav>
         <!-- <a href="#">Logout</a> -->
         {% if user.is_authenticated %}
-            <p class="welcome-msg">Hello, {{ request.user.first_name }}! Location: {{ request.user.location }}</p>
+            <p class="welcome-msg">Hello, {{ request.user.first_name }}! <br>Location: {{ request.user.location }}</p>
             <a href="{% url 'logout' %}">Logout</a><br>
+
+        {% else %}
+            
         {% endif %}
     </nav>
       {% block content %}
