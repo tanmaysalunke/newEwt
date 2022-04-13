@@ -242,18 +242,14 @@ def sendToData(request):
             if i.category == category:
                 if i.location not in locs:
                     locs.append(i.location)
-                # for j in setLoc:
         for i in setLoc:
             if i.category == category and i.location == location:
                 if i.company_name not in comp_names:
                     comp_names.append(i.company_name)
-        print(locs, comp_names)
         if len(category)>0:
-            print(category)
-            print(location)
             data = {'location':locs, 'company_name':comp_names}
         else:
-            data = {'type':'abc'}
+            data = {'type':'abc'} #dummy value
         return JsonResponse(data)
 
 
@@ -286,7 +282,6 @@ def sendData(request):
                             receiver_category = receiver_category )
             transaction.save()
             log.save()
-            print(log)
         return JsonResponse(d)
 
 def recycled(request):

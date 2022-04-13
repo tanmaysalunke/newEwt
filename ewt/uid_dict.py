@@ -28,9 +28,10 @@ ram_spec = {
     "2_GB": "00",
     "4_GB": "01",
     "8_GB": "02",
-    "16_GB": "03",
-    "32_GB": "04",
-    "64_GB": "05"
+    "12_GB": "03",
+    "16_GB": "04",
+    "32_GB": "05",
+    "64_GB": "06"
 }
 
 
@@ -95,17 +96,21 @@ processor_spec = {
 
 
 graphics_type = {
-    "Radeon_RX_6700M": "00",
+    "AMD_Radeon_RX_6700M": "00",
     "NVIDIA_GeForce_RTX_3070": "01",
-    "NVIDIA_Quadro_RTX_5000": "02",
-    "NVIDIA_1660Ti": "03"
+    "NVIDIA_GeForce_RTX_2070_Super": "02",
+    "NVIDIA_1660Ti": "03",
+    "NVIDIA_GeForce_RTX_3080_Ti": "04",
+    "AMD_Radeon_RX_6800M": "05",
 }
 
 graphics_spec = {
     "1_GB": "00",
     "2_GB": "01",
     "4_GB": "02",
-    "6_GB": "03"
+    "6_GB": "03",
+    "8_GB": "04",
+    "12_GB": "05",
 }
 
 

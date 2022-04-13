@@ -24,6 +24,7 @@
     			</tr>
 				{% for record in logs %}
 					{% if record.username == request.user.username %}
+					{% if record.category == "Manufacturer" or record.category == "Refurbisher" %}
 						<tr>
     					  <td id="test" value="{{ record.id }}" >{{ record.id }}</td>
     					  <td><a name="uidField" value="{{ record.id }}" class="anchor">{{ record.uid }}</a></td>
@@ -31,6 +32,15 @@
     					  <td><input type="checkbox" value="{{ record.id }}" name="chk" class="checkbox">
     					    <span class="checkmark"></span></td>
     					</tr>
+					{% elif record.category == "Recycler" %}
+					<tr>
+						<td id="test" value="{{ record.id }}" >{{ record.id }}</td>
+						<td><a name="uidField" value="{{ record.id }}" class="anchor" style="pointer-events: none">{{ record.uid }}</a></td>
+						<td>{{ record.modified }}</td>
+						<td><input type="checkbox" value="{{ record.id }}" name="chk" class="checkbox">
+						  <span class="checkmark"></span></td>
+					  </tr>
+					{% endif %}
 					{% endif %}
 				{% endfor %}
 
